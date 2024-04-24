@@ -12,5 +12,5 @@ interface CurrencyFormatterOptions extends Intl.NumberFormatOptions {
         [key: string]: CurrencyData;
     };
 }
-declare function remarkCurrencyFormatter(options: CurrencyFormatterOptions): (tree: Node) => void;
+declare function remarkCurrencyFormatter(options?: CurrencyFormatterOptions): (tree: Node) => void;
 export default remarkCurrencyFormatter;
