@@ -30,13 +30,12 @@ function remarkCurrencyFormatter(options: CurrencyFormatterOptions) {
         const text = node.value;
         const regex = /\$\(([\d\.]+),?(\w+)?\)/g;  // Regex to capture numbers and optional currency codes
         const newText = text.replace(regex, (match, amount: string, currencyCode?: string) => {
-          const loc = locale ? locale : undefined;
           // Construct formatter options dynamically, including currency only if defined
           const dynamicFormatterOptions = {
             ...formatterOptions,
-            ...(currencyCode && { currency: currencyCode })
+            ...(currencyCode ? { currency: currencyCode } : {})
           };
-          const formatter = new ExchNumberFormat(loc, dynamicFormatterOptions);
+          const formatter = new ExchNumberFormat(locale || undefined, dynamicFormatterOptions);
           return formatter.format(parseFloat(amount));
         });
 
