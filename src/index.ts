@@ -17,12 +17,8 @@ interface CurrencyFormatterOptions extends Intl.NumberFormatOptions {
   };
 }
 
-function remarkCurrencyFormatter(options: CurrencyFormatterOptions) {
-  const { locale, customCurrencyData } = options;
-
-  const formatterOptions = {
-    customCurrency: customCurrencyData,
-  };
+function remarkCurrencyFormatter(options: CurrencyFormatterOptions = {}) {
+  const { locale, customCurrencyData = {} } = options;
 
   return (tree: Node) => {
     visit(tree, 'text', (node: Node) => {
@@ -30,12 +26,12 @@ function remarkCurrencyFormatter(options: CurrencyFormatterOptions) {
         const text = node.value;
         const regex = /\$\(([\d\.]+),?(\w+)?\)/g;  // Regex to capture numbers and optional currency codes
         const newText = text.replace(regex, (match, amount: string, currencyCode?: string) => {
-          // Construct formatter options dynamically, including currency only if defined
+          // Dynamically construct formatter options, including currency only if defined
           const dynamicFormatterOptions = {
-            ...formatterOptions,
+            customCurrency: customCurrencyData,
             ...(currencyCode ? { currency: currencyCode } : {})
           };
-          const formatter = new ExchNumberFormat(locale || undefined, dynamicFormatterOptions);
+          const formatter = new ExchNumberFormat(locale, dynamicFormatterOptions);
           return formatter.format(parseFloat(amount));
         });
 

@@ -1,6 +1,6 @@
 {
   "name": "remark-currency-formatter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A Remark plugin to transform currency amounts into custom format.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -59,7 +59,7 @@ Configure the plugin with the following options to customize its behavior and ou
 
 Example of customCurrencyData:
 
-```json
+```js
 {
   BTC: {
     symbol: '₿',

@@ -1,10 +1,7 @@
 import { visit } from 'unist-util-visit';
 import ExchNumberFormat from 'exchange-rounding';
-function remarkCurrencyFormatter(options) {
-    const { locale, customCurrencyData } = options;
-    const formatterOptions = {
-        customCurrency: customCurrencyData,
-    };
+function remarkCurrencyFormatter(options = {}) {
+    const { locale, customCurrencyData = {} } = options;
     return (tree) => {
         visit(tree, 'text', (node) => {
             if ('value' in node && typeof node.value === 'string') {
@@ -12,10 +9,10 @@ function remarkCurrencyFormatter(options) {
                 const regex = /\$\(([\d\.]+),?(\w+)?\)/g;
                 const newText = text.replace(regex, (match, amount, currencyCode) => {
                     const dynamicFormatterOptions = {
-                        ...formatterOptions,
+                        customCurrency: customCurrencyData,
                         ...(currencyCode ? { currency: currencyCode } : {})
                     };
-                    const formatter = new ExchNumberFormat(locale || undefined, dynamicFormatterOptions);
+                    const formatter = new ExchNumberFormat(locale, dynamicFormatterOptions);
                     return formatter.format(parseFloat(amount));
                 });
                 node.value = newText;
