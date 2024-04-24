@@ -11,12 +11,11 @@ function remarkCurrencyFormatter(options) {
                 const text = node.value;
                 const regex = /\$\(([\d\.]+),?(\w+)?\)/g;
                 const newText = text.replace(regex, (match, amount, currencyCode) => {
-                    const loc = locale ? locale : undefined;
                     const dynamicFormatterOptions = {
                         ...formatterOptions,
-                        ...(currencyCode && { currency: currencyCode })
+                        ...(currencyCode ? { currency: currencyCode } : {})
                     };
-                    const formatter = new ExchNumberFormat(loc, dynamicFormatterOptions);
+                    const formatter = new ExchNumberFormat(locale || undefined, dynamicFormatterOptions);
                     return formatter.format(parseFloat(amount));
                 });
                 node.value = newText;
