@@ -1,0 +1,63 @@
+{
+  "name": "remark-currency-formatter",
+  "version": "0.1.0",
+  "description": "A Remark plugin to transform currency amounts into custom format.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "test": "npm run build && node --loader ts-node/esm ./node_modules/uvu/bin.js test",
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm --inspect src/index.ts",
+    "start": "node --loader ts-node/esm src/index.ts",
+    "verbose": "clear && npm run build && node --loader ts-node/esm ./node_modules/uvu/bin.js --verbose test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bchainhub/remark-currency-formatter"
+  },
+  "files": [
+    "src/",
+    "dist/",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "remark",
+    "plugin",
+    "remark-plugin",
+    "markdown",
+    "links",
+    "transform",
+    "currency",
+    "formatter",
+    "ExchNumberFormat",
+    "Intl.NumberFormat",
+    "docusaurus",
+    "gatsby"
+  ],
+  "author": "Blockchain Hub",
+  "license": "CORE",
+  "dependencies": {
+    "exchange-rounding": "^1.1.2",
+    "@types/unist": "^3.0.2",
+    "unist-util-visit": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "esm": "^3.2.25",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "undici-types": "^6.14.1",
+    "unified": "^11.0.4",
+    "uvu": "^0.5.6"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  }
+}
