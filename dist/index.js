@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit';
 import ExchNumberFormat from 'exchange-rounding';
-function remarkCurrencyFormatter(options = {}) {
+export default function remarkCurrencyFormatter(options = {}) {
     const { locale, customCurrencyData = {} } = options;
     return (tree) => {
         visit(tree, 'text', (node) => {
@@ -20,4 +20,3 @@ function remarkCurrencyFormatter(options = {}) {
         });
     };
 }
-export default remarkCurrencyFormatter;

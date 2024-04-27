@@ -1,4 +1,4 @@
-import { Node } from 'unist';
+import { Root, RootContent } from 'mdast';
 import { visit } from 'unist-util-visit';
 import ExchNumberFormat from 'exchange-rounding';
 
@@ -17,11 +17,11 @@ interface CurrencyFormatterOptions extends Intl.NumberFormatOptions {
   };
 }
 
-function remarkCurrencyFormatter(options: CurrencyFormatterOptions = {}) {
+export default function remarkCurrencyFormatter(options: CurrencyFormatterOptions = {}) {
   const { locale, customCurrencyData = {} } = options;
 
-  return (tree: Node) => {
-    visit(tree, 'text', (node: Node) => {
+  return (tree: Root) => {
+    visit(tree, 'text', (node: RootContent) => {
       if ('value' in node && typeof node.value === 'string') {
         const text = node.value;
         const regex = /\$\(([\d\.]+),?(\w+)?\)/g;  // Regex to capture numbers and optional currency codes
@@ -40,5 +40,3 @@ function remarkCurrencyFormatter(options: CurrencyFormatterOptions = {}) {
     });
   };
 }
-
-export default remarkCurrencyFormatter;

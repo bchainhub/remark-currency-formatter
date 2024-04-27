@@ -1,4 +1,4 @@
-import { Node } from 'unist';
+import { Root } from 'mdast';
 
 declare module 'remark-currency-formatter' {
   interface CurrencyData {
@@ -16,5 +16,5 @@ declare module 'remark-currency-formatter' {
     };
   }
 
-  export default function remarkCurrencyFormatter(options: CurrencyFormatterOptions): (tree: Node) => void;
+  export default function remarkCurrencyFormatter(options: CurrencyFormatterOptions): (tree: Root) => void;
 }

@@ -1,4 +1,4 @@
-import { Node } from 'unist';
+import { Root } from 'mdast';
 interface CurrencyData {
     symbol: string;
     narrowSymbol: string;
@@ -12,5 +12,5 @@ interface CurrencyFormatterOptions extends Intl.NumberFormatOptions {
         [key: string]: CurrencyData;
     };
 }
-declare function remarkCurrencyFormatter(options?: CurrencyFormatterOptions): (tree: Node) => void;
-export default remarkCurrencyFormatter;
+export default function remarkCurrencyFormatter(options?: CurrencyFormatterOptions): (tree: Root) => void;
+export {};
